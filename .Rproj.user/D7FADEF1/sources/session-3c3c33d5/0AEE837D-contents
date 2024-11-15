@@ -1,3 +1,26 @@
+
+formula <- bf(
+  y ~ nPHDbl + age + gender_A + married + EmployYN + ssdi + b_rrv + aaever + aalastyear + anytx + sca10a. + bsdi + bsai + mArm + race + education + Readiness + asecat + asetat + pil + bdi0 + anger0 + adstotal + auditc + auditprobs + rbbtots,
+  phi ~ 1,
+  zoi ~ nPHDbl + age + gender_A + married + EmployYN + ssdi + b_rrv + aaever + aalastyear + anytx + sca10a. + bsdi + bsai + mArm + race + education + Readiness + asecat + asetat + pil + bdi0 + anger0 + adstotal + auditc + auditprobs + rbbtots,
+  coi ~nPHDbl + age + gender_A + married + EmployYN + ssdi + b_rrv + aaever + aalastyear + anytx + sca10a. + bsdi + bsai + mArm + race + education + Readiness + asecat + asetat + pil + bdi0 + anger0 + adstotal + auditc + auditprobs + rbbtots
+)
+
+formula_offset <- bf(
+  y ~ nPHDbl + age + gender_A + married + EmployYN + ssdi + b_rrv + aaever + aalastyear + anytx + sca10a. + bsdi + bsai + mArm + race + education + Readiness + asecat + asetat + pil + bdi0 + anger0 + adstotal + auditc + auditprobs + rbbtots + offset(z_beta),
+  phi ~ 1,
+  zoi ~ nPHDbl + age + gender_A + married + EmployYN + ssdi + b_rrv + aaever + aalastyear + anytx + sca10a. + bsdi + bsai + mArm + race + education + Readiness + asecat + asetat + pil + bdi0 + anger0 + adstotal + auditc + auditprobs + rbbtots+ offset(z_zoi),
+  coi ~nPHDbl + age + gender_A + married + EmployYN + ssdi + b_rrv + aaever + aalastyear + anytx + sca10a. + bsdi + bsai + mArm + race + education + Readiness + asecat + asetat + pil + bdi0 + anger0 + adstotal + auditc + auditprobs + rbbtots+offset(z_coi)
+)
+
+formula_ate <- bf(
+  y ~ trt,
+  phi ~ 1,
+  zoi ~ trt,
+  coi ~ trt
+)
+
+
 zoib.fit <- function(df,type){
   if(type==1){
     model <-  brm(
