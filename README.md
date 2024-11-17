@@ -37,7 +37,7 @@ sd(apply(pite_mc,2,mean))
 nperm = 2
 full_trtperms <- replicate(n=nperm, sample(treat, replace = F))
 
-perm.test.pite <- lapply(1:nperm,function(p)perm.test(datac,datat,treat,full_trtperms[,p]))
+perm.test.pite <- lapply(1:nperm,function(p)perm.test(datac,datat,full_trtperms[,p]))
 lapply(lapply(perm.test.pite, function(x){apply(x,2,mean)}),sd)
 
 ```

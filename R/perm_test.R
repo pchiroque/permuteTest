@@ -1,6 +1,6 @@
 #' @export
 
-perm.test <- function(dfc,dft, treat, trtperms){
+perm.test <- function(dfc,dft, trtperms){
   #
   data <- rbind(dft,dfc)
 
@@ -18,8 +18,8 @@ perm.test <- function(dfc,dft, treat, trtperms){
   data$z_zoi = trtperms*estimates[6,1] # offset.zoi
   data$z_coi = trtperms*estimates[7,1] # offset.coi
 
-  dft <- (data[treat==1,]) %>% dplyr::select(-trt)
-  dfc <- (data[treat==0,]) %>% dplyr::select(-trt)
+  dft <- (data[trtperms==1,]) %>% dplyr::select(-trt)
+  dfc <- (data[trtperms==0,]) %>% dplyr::select(-trt)
 
   f_t_w_ate <-  zoib.fit(dft,3)
   f_c_w_ate <-  zoib.fit(dfc,3)
